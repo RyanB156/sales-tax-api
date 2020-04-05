@@ -19,6 +19,7 @@ namespace SalesTaxCalculator
 
         public SalesTaxCalculator()
         {
+            logger = new Logger();
             int port = 1156;
             IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
 
@@ -28,36 +29,50 @@ namespace SalesTaxCalculator
             data = "";
         }
 
-        
-
         public void Start()
         {
-            server.Start();
-
-            while (true)
+            try
             {
-                logger.Info("Waiting for a connection");
+                server.Start();
+                logger.Info("Starting the server");
 
-                TcpClient client = server.AcceptTcpClient();
-                logger.Debug("Connected");
-
-                NetworkStream stream = client.GetStream();
-                int i;
-
-                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                while (true)
                 {
-                    data = Encoding.ASCII.GetString(bytes, 0, i);
-                    logger.Info($"Received: {data}");
+                    logger.Info("Waiting for a connection");
 
-                    string str = "Thank you!";
-                    char[] strCharacters = str.ToCharArray();
-                    byte[] response = Encoding.ASCII.GetBytes(strCharacters, 0, strCharacters.Length);
+                    TcpClient client = server.AcceptTcpClient();
+                    logger.Info("Connected");
 
-                    stream.Write(response, 0, response.Length);
-                    logger.Info($"Sent: {str}");
+                    NetworkStream stream = client.GetStream();
+                    int i;
+
+                    while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                    {
+                        data = Encoding.ASCII.GetString(bytes, 0, i);
+                        logger.Debug($"Received: {data}");
+
+                        string str = "Here you go!";
+                        char[] strCharacters = str.ToCharArray();
+                        byte[] response = Encoding.ASCII.GetBytes(strCharacters, 0, strCharacters.Length);
+
+                        stream.Write(response, 0, response.Length);
+                        logger.Debug($"Sent: {str}");
+                    }
+
+                    client.Close();
+
                 }
-
             }
+            catch (SocketException e)
+            {
+                logger.Error(e);
+            }
+            finally
+            {
+                server.Stop();
+                logger.Info("Stopping the server");
+            }
+            
         }
     }
 }
