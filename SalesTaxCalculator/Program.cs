@@ -10,6 +10,8 @@ namespace SalesTaxCalculator
     {
         static void Main(string[] args)
         {
+            Logger logger = new Logger();
+            logger.Info("Hello, World!");
         }
     }
 }
