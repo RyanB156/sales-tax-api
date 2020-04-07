@@ -17,13 +17,13 @@ namespace UnitTest
         [TestMethod]
         public void ReturnValueTest1()
         {
-            Assert.AreEqual(data.GetTaxAmount("Alamance County"), 6.75);
+            Assert.AreEqual(data.GetTaxAmount("alamance county"), 6.75);
         }
 
         [TestMethod]
         public void ReturnValueTest2()
         {
-            Assert.AreEqual(data.GetTaxAmount("Buncombe County"), 7.00);
+            Assert.AreEqual(data.GetTaxAmount("buncombe county"), 7.00);
         }
 
         [TestMethod]
