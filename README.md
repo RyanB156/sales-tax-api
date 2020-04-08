@@ -29,7 +29,7 @@ Supported request methods: GET, POST
 ---------------------------------------------------------------------------------------------------
 ## Input Format:
 
-  #### -County  
+  ### County  
   
   The county name must have the name of the county followed by "county".
   The county name is case insensitive and allows single spaces or underscores for separating words.
@@ -37,7 +37,7 @@ Supported request methods: GET, POST
   The following is a nonexhaustive list of possible values for Macon County:  
     ["Macon County", "macon county", "MACON COUNTY", "Macon_County"]
     
-  #### -Price
+  ### Price
   
   The price must be a positive rational number.
   Negative numbers and zero are not allowed.
@@ -68,14 +68,14 @@ Supported request methods: GET, POST
     for failed POST requests with the following JSON object:    
     ```
     {
-    "Error": <error message>
+      "Error": <error message>
     }
     ```
       
    Error is a string containing the error message.
       
    The following errors will be returned by the API:
-   ```
+   
       "CountyError" - The specified county did not exist in the database
       "JsonBodyError" - The JSON body was not in the expected format
       "JsonCountyError" - The county field was null in the JSON body
@@ -85,4 +85,4 @@ Supported request methods: GET, POST
       "PriceNullError" - Unable to parse the price
       "QueryError" - The GET request was missing the county or price argument
       "UnsupportedMethodError" - The request used an unsupported method type
-    ```
+    
