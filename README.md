@@ -47,7 +47,7 @@ Supported request methods: GET, POST
     
   ###  Successful Request
   
-  The API will return HTTP status code 200 (OK) for successful requests and the following JSON object:
+  The API will return HTTP status code 200 (OK) for successful requests and the following JSON object:  
     ```
       {
         "County": <county name>,
@@ -57,20 +57,20 @@ Supported request methods: GET, POST
       }
     ```
         
-      County is the name of the county that was specified in the request.
-      SalePrice is the price that was specified in the request as a decimal.
-      TaxRate is the tax rate for the specified county as a decimal.
-      SaleTotal is the total price after applying sales tax to the price as a decimal.
+    County is the name of the county that was specified in the request.
+    SalePrice is the price that was specified in the request as a decimal.
+    TaxRate is the tax rate for the specified county as a decimal.
+    SaleTotal is the total price after applying sales tax to the price as a decimal.
     
   ### Failed Request
     
   The API will return HTTP status code 404 (Not Found) for failed GET requests and HTTP status code 400 (Bad Request) 
-    for failed POST requests with the following JSON object:
-      ```
-      {
-        "Error": <error message>
-      }
-      ```
+    for failed POST requests with the following JSON object:    
+    ```
+    {
+    "Error": <error message>
+    }
+    ```
       
    Error is a string containing the error message.
       
