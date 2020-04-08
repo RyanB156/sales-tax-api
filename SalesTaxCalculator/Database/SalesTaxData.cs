@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SalesTaxCalculator
 {
+
+    /// <summary>
+    /// Used to fetch the sales tax rate for counties in North Carolina.
+    /// </summary>
     public class SalesTaxData
     {
 
@@ -127,13 +128,13 @@ namespace SalesTaxCalculator
         /// </summary>
         /// <param name="countyName">The county to fetch the tax rate for</param>
         /// <returns>A double representing the sales tax rate in that county or -1 if the county was not found</returns>
-        public double GetTaxAmount(string countyName)
+        public decimal GetTaxAmount(string countyName)
         {
             if (countyName == null)
                 return -1;
             try
             {
-                Double.TryParse(taxData[countyName], out double result);
+                Decimal.TryParse(taxData[countyName], out decimal result);
                 return result;
             }
             catch (KeyNotFoundException)

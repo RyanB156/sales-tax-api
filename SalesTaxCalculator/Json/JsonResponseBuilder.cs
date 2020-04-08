@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace SalesTaxCalculator.Json
 {
+
+    /// <summary>
+    /// Build JSON strings for the given types.
+    /// </summary>
     public class JsonResponseBuilder
     {
 

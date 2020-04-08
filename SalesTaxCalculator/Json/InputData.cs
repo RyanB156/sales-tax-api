@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SalesTaxCalculator.Json
+﻿namespace SalesTaxCalculator.Json
 {
+
+    /// <summary>
+    /// Class to hold the incoming data from POST requests.
+    /// </summary>
     public class InputData
     {
         public string County { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

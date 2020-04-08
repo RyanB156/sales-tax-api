@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SalesTaxCalculator.Json
+﻿namespace SalesTaxCalculator.Json
 {
+
+    /// <summary>
+    /// Class that will be sent in the JSON reponse after successful queries.
+    /// </summary>
     public class SaleResult
     {
         public string County { get; set; }
-        public double SalePrice { get; set; }
-        public double TaxRate { get; set; }
-        public double SaleTotal { get; set; }
+        public decimal SalePrice { get; set; }
+        public decimal TaxRate { get; set; }
+        public decimal SaleTotal { get; set; }
     }
 }

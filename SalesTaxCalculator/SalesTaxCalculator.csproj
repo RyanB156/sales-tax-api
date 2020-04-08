@@ -46,24 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Json\Error.cs" />
+    <Compile Include="Utilities\ExtensionMethods.cs" />
+    <Compile Include="Json\ErrorMessage.cs" />
     <Compile Include="Json\InputData.cs" />
     <Compile Include="Json\JsonResponseBuilder.cs" />
     <Compile Include="Json\SaleResult.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="Utilities\Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SalesTaxCalculator.cs" />
-    <Compile Include="SalesTaxData.cs" />
-    <Compile Include="Status.cs" />
+    <Compile Include="Server\SalesTaxCalculator.cs" />
+    <Compile Include="Database\SalesTaxData.cs" />
+    <Compile Include="Utilities\Status.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\errorResponse.html" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

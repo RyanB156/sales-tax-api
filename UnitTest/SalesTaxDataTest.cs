@@ -4,6 +4,10 @@ using SalesTaxCalculator;
 
 namespace UnitTest
 {
+
+    /// <summary>
+    /// Unit testing of the sales tax data lookup procedure.
+    /// </summary>
     [TestClass]
     public class SalesTaxDataTest
     {
@@ -17,31 +21,31 @@ namespace UnitTest
         [TestMethod]
         public void ReturnValueTest1()
         {
-            Assert.AreEqual(data.GetTaxAmount("alamance county"), 6.75);
+            Assert.AreEqual(6.75m, data.GetTaxAmount("alamance county"));
         }
 
         [TestMethod]
         public void ReturnValueTest2()
         {
-            Assert.AreEqual(data.GetTaxAmount("buncombe county"), 7.00);
+            Assert.AreEqual(7.00m, data.GetTaxAmount("buncombe county"));
         }
 
         [TestMethod]
         public void ReturnValueTest3()
         {
-            Assert.AreEqual(data.GetTaxAmount("countyname"), -1);
+            Assert.AreEqual(-1m, data.GetTaxAmount("countyname"));
         }
 
         [TestMethod]
         public void ReturnValueTest4()
         {
-            Assert.AreEqual(data.GetTaxAmount(null), -1);
+            Assert.AreEqual(-1m, data.GetTaxAmount(null));
         }
 
         [TestMethod]
         public void ReturnValueTest5()
         {
-            Assert.AreEqual(data.GetTaxAmount(""), -1);
+            Assert.AreEqual(-1m, data.GetTaxAmount(""));
         }
     }
 }

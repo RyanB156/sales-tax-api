@@ -5,6 +5,10 @@ using System.Net.Http;
 
 namespace UnitTest
 {
+
+    /// <summary>
+    /// Unit testing of the parsing process for GET requests. Checks the HTTP response status code.
+    /// </summary>
     [TestClass]
     public class GetTests
     {
@@ -36,7 +40,7 @@ namespace UnitTest
             }
         }
 
-        // Test a list of bad GET query arguments to ensure that they parse correctly.
+        // Test a list of bad GET query arguments to ensure that they fail correctly.
         [TestMethod]
         public async Task GetTest2()
         {
@@ -48,7 +52,8 @@ namespace UnitTest
                 { "ORANGE777COUNTY", "0.001" },
                 { "Robeson County", "" },
                 { "Lincoln County", "a" },
-                { "Lenoir County", "---" }
+                { "Lenoir County", "---" },
+                { "alamance county", "-5" }
             };
 
             using (var client = new HttpClient())
@@ -84,6 +89,7 @@ namespace UnitTest
             }
         }
 
+        // Test GET request with no query arguments given.
         [TestMethod]
         public async Task GetTest4()
         {
@@ -100,6 +106,7 @@ namespace UnitTest
             }
         }
 
+        // Test GET request with no '?' to signal the beginning of query arguments.
         [TestMethod]
         public async Task GetTest5()
         {
@@ -116,10 +123,28 @@ namespace UnitTest
             }
         }
 
+        // Test GET request with invalid query arguments.
         [TestMethod]
         public async Task GetTest6()
         {
             string url = "http://localhost:8080/salestax/?name=abc&day=Monday";
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+
+                Assert.AreEqual(System.Net.HttpStatusCode.NotFound, response.StatusCode);
+
+                string result = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(result);
+
+            }
+        }
+
+        // Test GET request with the wrong local path.
+        [TestMethod]
+        public async Task GetTest7()
+        {
+            string url = "http://localhost:8080/salestax/data/?county=Alamance County&price=10.00";
             using (var client = new HttpClient())
             {
                 var response = await client.GetAsync(url);
