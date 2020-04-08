@@ -4,14 +4,14 @@ A RESTful API for calculating sales tax for a retail transaction in North Caroli
 Endpoint: /salestax/
 Supported request methods: GET, POST
 
-GET syntax:
+GET syntax:  
   <host>/salestax/?county=<county name>&price=<price>
   or
   <host>/salestax/?price=<price>&county=<county name>
   
   The order of the query arguments does not matter.
   
-POST syntax:
+POST syntax:  
   <host>/salestax/
   {
     "County": "<county name>",
@@ -24,14 +24,17 @@ POST syntax:
 ---------------------------------------------------------------------------------------------------
 Input Format:
 
-  -County
+  -County  
+  
   The county name must have the name of the county followed by "county".
   The county name is case insensitive and allows single spaces or underscores for separating words.
 
-  The following is a nonexhaustive list of possible values for Macon County:
+  The following is a nonexhaustive list of possible values for Macon County:  
+  
     ["Macon County", "macon county", "MACON COUNTY", "Macon_County"]
     
   -Price
+  
   The price must be a positive rational number.
   Negative numbers and zero are not allowed.
   
