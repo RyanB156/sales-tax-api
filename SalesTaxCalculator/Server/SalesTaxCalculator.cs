@@ -61,12 +61,14 @@ namespace SalesTaxCalculator
                 {
                     // Attempt to parse the county name and price from the URI.
                     countyName = request.QueryString["county"].Replace('_', ' ').ToLower();
-                    if (!Decimal.TryParse(requestQuery["price"], out price) || price <= 0)
-                        return Status.Failure("Invalid price");
+                    if (!Decimal.TryParse(requestQuery["price"], out price))
+                        return Status.Failure("PriceNullError");
+                    if (price <= 0)
+                        return Status.Failure("PriceInvalidError");
                 }
                 else
                 {
-                    return Status.Failure("Expected 'county' and 'price' in the URI");
+                    return Status.Failure("QueryError");
                 }
 
                 return Status.Success();
@@ -76,7 +78,7 @@ namespace SalesTaxCalculator
 
                 // Ensure that the body is in JSON format.
                 if (!request.HasEntityBody || !request.ContentType.Split(';').Contains("application/json"))
-                    return Status.Failure("Expected a JSON body");
+                    return Status.Failure("JsonContentError");
 
                 // Read the request body and remove trailing characters.
                 request.InputStream.Read(bytes, 0, bytes.Length);
@@ -87,10 +89,13 @@ namespace SalesTaxCalculator
                 InputData inputData = JsonConvert.DeserializeObject<InputData>(body);
 
                 if (inputData == null)
-                    return Status.Failure("Expected a JSON body");
+                    return Status.Failure("JsonBodyError");
 
-                if (inputData.County == null || inputData.Price <= 0)
-                    return Status.Failure("Invalid county or price in JSON body");
+                if (inputData.County == null)
+                    return Status.Failure("JsonCountyError");
+
+                if (inputData.Price <= 0)
+                    return Status.Failure("PriceInvalidError");
 
                 countyName = inputData.County.Replace('_', ' ').ToLower();
                 price = inputData.Price;
@@ -98,7 +103,7 @@ namespace SalesTaxCalculator
             }
             else
             {
-                return Status.Failure("Unsopported HTTP method");
+                return Status.Failure("UnsupportedMethodError");
             }
             
         }
@@ -205,7 +210,7 @@ namespace SalesTaxCalculator
 
                     if (!request.Url.LocalPath.Equals("/salestax/"))
                     {
-                        SendFailure(response, Status.Failure("Expected only '/salestax/' as the local path"), request.HttpMethod);
+                        SendFailure(response, Status.Failure("LocalPathError"), request.HttpMethod);
                     }
                     else
                     {
@@ -221,7 +226,7 @@ namespace SalesTaxCalculator
                             }
                             else
                             {
-                                SendFailure(response, Status.Failure($"Unable to find the tax rate for county '{countyName}'"), request.HttpMethod);
+                                SendFailure(response, Status.Failure("CountyError"), request.HttpMethod);
                             }
                         }
                         else
